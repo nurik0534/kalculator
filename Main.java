@@ -1,10 +1,20 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import static java.lang.Integer.parseInt;
 import java.util.Objects;
-public class  Main {
+
+import static java.lang.Integer.parseInt;
+
+public class Main {
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Введите математическое выражение через пробел");
+        String text = br.readLine();
+        calc(text);
+
+    }
+
+    public static String calc(String text) throws IOException {
         String operation = null;
         int result = 0;
         int num1 = 0;
@@ -12,16 +22,13 @@ public class  Main {
         boolean r = false;
         boolean f = false;
         String[] roman = new String[]{"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL", "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX", "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX", "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX", "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Введите математическое выражение через пробел");
-        String text = br.readLine();
         String[] text1 = text.split(" ");
         if (text1.length != 3) {
             try {
                 throw new IOException();
             } catch (IOException e) {
                 System.out.println("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)(Вводить нужно через пробел)");
-                return;
+                return ("stop");
             }
         }
         for (int i = 0; i < roman.length; i++) {
@@ -39,7 +46,7 @@ public class  Main {
                 throw new IOException();
             } catch (IOException e) {
                 System.out.println("используются одновременно разные системы счисления");
-                return;
+                return("stop");
             }
         }
         for (int i = 0; i < 3; i++) {
@@ -48,7 +55,7 @@ public class  Main {
                     parseInt(text1[0]);
                 } catch (NumberFormatException e) {
                     System.out.println("Введенный символ не является целым числом");
-                    return;
+                    return ("stop");
                 }
                 num1 = parseInt(text1[0]);
                 if ((num1 < 0 || num1 > 10)) {
@@ -56,7 +63,7 @@ public class  Main {
                         throw new IOException();
                     } catch (IOException e) {
                         System.out.println("ВВеденное число не входит в промедуток от 1 до 10");
-                        return;
+                        return ("stop");
                     }
                 }
             }
@@ -68,8 +75,8 @@ public class  Main {
                     try {
                         throw new IOException();
                     } catch (IOException e) {
-                        System.out.println("Введенное математичексое выражение неверно");
-                        return;
+                        System.out.println("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)(Вводить нужно через пробел)");
+                        return ("stop");
                     }
                 }
             }
@@ -78,7 +85,7 @@ public class  Main {
                     parseInt(text1[2]);
                 } catch (NumberFormatException e) {
                     System.out.println("Введенный символ не является целым числом");
-                    return;
+                    return ("stop");
                 }
                 num2 = parseInt(text1[2]);
                 if ((num2 < 0 || num2 > 10)) {
@@ -86,7 +93,7 @@ public class  Main {
                         throw new IOException();
                     } catch (IOException e) {
                         System.out.println("ВВеденное число не входит в промедуток от 1 до 10");
-                        return;
+                        return ("stop");
                     }
                 }
             }
@@ -104,7 +111,7 @@ public class  Main {
                     throw new IOException();
                 } catch (IOException e) {
                     System.out.println("Резултат операции с римскими цифрами не может быть меньше 0");
-                    return;
+                    return ("stop");
                 }
             }
             m = String.valueOf(result);
@@ -113,5 +120,6 @@ public class  Main {
         } else {
             System.out.println(result);
         }
+        return String.valueOf((result));
     }
 }
